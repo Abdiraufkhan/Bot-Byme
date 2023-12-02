@@ -23,10 +23,12 @@ class BotController {
   public post = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
+      console.log(req.body);
+      
       const messageObj = req.body.message;   
-      const contact = req.body.message.contact
+      const contact = req.body.message
 
-      if (contact) {
+      if (contact.contact) {
         await this.service.savePhoneNumber(messageObj)
          res.status(StatusCode.Ok).json({
            "message":"Pressed <START> and information was saved succesfullly!"          

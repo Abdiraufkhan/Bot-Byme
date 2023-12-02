@@ -56,7 +56,7 @@ class BotService {
                 first_name: first_name
               }
               const checkUser = await this.repo.getByChatId(`${chat_id}`)
-              console.log(checkUser);
+              console.log("user", checkUser);
               
               if (!checkUser) {
                 await this.repo.create(NewData);
@@ -66,18 +66,21 @@ class BotService {
                     reply_markup: {
                     keyboard: [[{ text: "Jo'natish", request_contact: true }]],
                     resize_keyboard: true,
-                    one_time_keyboard: true,
+                    one_time_keyboard: false,
                 },
               });
+
                
               } else {
                 return this.SendSms.post("sendMessage", { 
                     chat_id: messageObj.chat.id, 
                     text: `👋Salom ${first_name}! Sizga yordam berishdan mamnunmiz! telefon raqamingizni kiriting!`,
                     reply_markup: {
-                    keyboard: [[{ text: "Jo'natish", request_contact: true }]],
+                        keyboard: [
+                        [{ text: "Jo'natish", request_contact: true }]
+                    ],
                     resize_keyboard: true,
-                    one_time_keyboard: true,
+                    one_time_keyboard: false,
                 },
               }) 
               }
@@ -132,12 +135,12 @@ class BotService {
 
                 return this.SendSms.post("sendMessage", {
                     chat_id: chatId,
-                    text: `Tabriklaymiz! Ro'yhatdan muvaffaqiyatli o'tdingiz! Xizmatlarimizdan foydalanish uchun quyidagi kanallarga a'zo bo'ling`,
+                    text: `SIZNI KEYINGI BOSQICHDA KO'RISHDAN CHIN DILDAN XURSANDMIZ 🤩🤩🤩`,
+                    has_protected_content: true,
                     reply_markup: {
-                        keyboard: [
+                        inline_keyboard: [
                             [
-                                { text: "⚡️ Web.me ⚡️", url: 'https://t.me/byme_web_files' },
-                                { text: "⚡️ PSD.me ⚡️", url: 'https://t.me/byme_photoshop_files' },
+                                { text: "⚡️ Buyurtma berish ⚡️", callback_data: 'uz' }
                             ],
                         ],
                         resize_keyboard: true,
@@ -148,7 +151,18 @@ class BotService {
 
                 return this.SendSms.post("sendMessage", {
                     chat_id: chatId,
-                    text: `Iltimos, avval kanalimizga a'zo bo'ling: ${channelId}`,
+                    text: `Tabriklaymiz! Ro'yhatdan muvaffaqiyatli o'tdingiz! Xizmatlarimizdan foydalanish uchun quyidagi kanalga a'zo bo'ling`,
+                    has_protected_content: true,
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                { text: "⚡️ Web.me ⚡️", url: 'https://t.me/byme_web_files' },
+                            ],
+                        ],
+                        resize_keyboard: true,
+                        one_time_keyboard: true,
+                    },
+                    
                 });
             }
         } catch (error) {
