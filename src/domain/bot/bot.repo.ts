@@ -42,6 +42,9 @@ class BotRepo {
       throw new Error("Error while updating the applicant: " + error.message);
     }
   } 
+  public getAll (): Promise<botUser[]>{
+    return botUser.findAll();
+}
 }
 
 

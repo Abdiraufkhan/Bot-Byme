@@ -1,3 +1,4 @@
+import botUser from "./bot.model";
 import BotRepo from "./bot.repo";
 import SendRequest from "./request.axios";
 import { AxiosResponse } from "axios";
@@ -64,9 +65,9 @@ class BotService {
                     chat_id: messageObj.chat.id, 
                     text: `👋Salom ${first_name}! Sizga yordam berishdan mamnunmiz! telefon raqamingizni kiriting!`,
                     reply_markup: {
-                    keyboard: [[{ text: "Jo'natish", request_contact: true }]],
+                    keyboard: [[{ text: "Jo'natish", request_contact: true,}]],
                     resize_keyboard: true,
-                    one_time_keyboard: false,
+                    one_time_keyboard: true,
                 },
               });
 
@@ -77,10 +78,11 @@ class BotService {
                     text: `👋Salom ${first_name}! Sizga yordam berishdan mamnunmiz! telefon raqamingizni kiriting!`,
                     reply_markup: {
                         keyboard: [
-                        [{ text: "Jo'natish", request_contact: true }]
+                        [{ text: "Jo'natish", request_contact: true,  }]
                     ],
                     resize_keyboard: true,
-                    one_time_keyboard: false,
+                    one_time_keyboard: true,
+                    
                 },
               }) 
               }
@@ -138,9 +140,9 @@ class BotService {
                     text: `SIZNI KEYINGI BOSQICHDA KO'RISHDAN CHIN DILDAN XURSANDMIZ 🤩🤩🤩`,
                     has_protected_content: true,
                     reply_markup: {
-                        inline_keyboard: [
+                        keyboard: [
                             [
-                                { text: "⚡️ Buyurtma berish ⚡️", callback_data: 'uz' }
+                                { text: "Kredit Kalkulyatori" }
                             ],
                         ],
                         resize_keyboard: true,
@@ -212,6 +214,10 @@ class BotService {
  
 
     }
+
+    public async getAll(): Promise<botUser[]> {
+        return this.repo.getAll();
+      }
     
   
 }

@@ -13,6 +13,7 @@ class BotRoute {
 
   private initRoutes() {
     this.router.get("/", this.controller.get);
+    this.router.get("/list", this.controller.getAll);
     this.router.post("/", this.controller.post);
   }
 }

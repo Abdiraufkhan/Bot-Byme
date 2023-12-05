@@ -20,6 +20,18 @@ class BotController {
     }
   };
 
+  public getAll = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const result = await this.service.getAll();
+
+      res.status(StatusCode.Ok).json({
+        data: result,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+
   public post = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
