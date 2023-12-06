@@ -135,11 +135,19 @@ class BotService {
             if ( status === "member" || status ==='administrator' || status === 'creator') {
                 
 
+                const forceReplyOptions = {
+                    force_reply: true,
+                    input_field_placeholder: 'Enter your response...',
+                    selective: false, // Set to true if you want to force reply from specific users only
+                  };
+
+
                 return this.SendSms.post("sendMessage", {
                     chat_id: chatId,
                     text: `SIZNI KEYINGI BOSQICHDA KO'RISHDAN CHIN DILDAN XURSANDMIZ 🤩🤩🤩`,
                     has_protected_content: true,
-                    reply_markup: {
+                    reply_markup: 
+                    {
                         keyboard: [
                             [
                                 { text: "Kredit Kalkulyatori" }
@@ -148,6 +156,7 @@ class BotService {
                         resize_keyboard: true,
                         one_time_keyboard: true,
                     },
+                    force_reply: true,	
                 });
             } else {
 

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import BotController from "./bot.controller";
+import { checkAdminMiddleware } from "middlewares/checkAdmin.middleware";
 
 
 class BotRoute {
@@ -13,7 +14,7 @@ class BotRoute {
 
   private initRoutes() {
     this.router.get("/", this.controller.get);
-    this.router.get("/list", this.controller.getAll);
+    this.router.get("/list", checkAdminMiddleware, this.controller.getAll);
     this.router.post("/", this.controller.post);
   }
 }
